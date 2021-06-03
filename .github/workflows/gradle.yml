@@ -21,14 +21,18 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: uninstall rootful Docker
+      run: sudo apt-get -q -y --purge remove moby-engine moby-buildx && sudo rm -rf /var/run/docker.sock
+    - name: install rootless Docker
+      run: |
+        mkdir -p $XDG_RUNTIME_DIR || true
+        curl -fsSL https://get.docker.com/rootless | sh > init.sh
+        cat init.sh
+        source <(grep '^export' init.sh)
+        PATH=$HOME/bin:$PATH dockerd-rootless.sh --experimental --storage-driver vfs &
+        sleep 1
+        DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock docker info || ls -la $XDG_RUNTIME_DIR
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: |
-        docker run -i --rm \
-          -v /var/run/docker.sock:/var/run/docker.sock \
-          -v "$HOME:$HOME" \
-          -v "$PWD:$PWD" \
-          -w "$PWD" \
-          openjdk:8-jdk-alpine \
-          ./gradlew build
+      run: ./gradlew build
