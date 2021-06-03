@@ -25,10 +25,10 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-      docker run -i --rm \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v "$HOME:$HOME" \
-      -v "$PWD:$PWD" \
-      -w "$PWD" \
-      openjdk:8-jdk-alpine \
-      ./gradlew build
+        docker run -i --rm \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          -v "$HOME:$HOME" \
+          -v "$PWD:$PWD" \
+          -w "$PWD" \
+          openjdk:8-jdk-alpine \
+          ./gradlew build
