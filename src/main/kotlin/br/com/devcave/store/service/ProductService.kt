@@ -7,6 +7,7 @@ import br.com.devcave.store.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductService(
@@ -14,6 +15,7 @@ class ProductService(
     private val discountService: DiscountService,
     private val productRepository: ProductRepository
 ) {
+    @Transactional(readOnly = true)
     suspend fun findByParams(category: String?, priceLessThan: Long?): Flow<ProductResponse> {
         val categoryToFilter = category?.let { categoryService.getByName(it) }
 

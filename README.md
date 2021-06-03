@@ -18,4 +18,4 @@ Techs:
 - [ ] Docker to start without nothing more
 
 Pomodoro cycles:
-- 7
+- 8

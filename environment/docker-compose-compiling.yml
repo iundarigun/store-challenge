@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=store
+      - POSTGRES_PASSWORD=store
+  app:
+    build: ../.
+    environment:
+      - SPRING_R2DBC_URL=r2dbc:postgresql://database:5432/store
+      - FLYWAY_URL=jdbc:postgresql://database:5432/store
+    depends_on:
+      - database
+    ports:
+    - 1980:1980

@@ -7,11 +7,13 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.mapNotNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class DiscountService(
     private val discountRepository: DiscountRepository
 ) {
+    @Transactional(readOnly = true)
     suspend fun findTheBestDiscount(categoryId: Long, productId: Long): Long? {
         return listOf(
             DiscountType.PRODUCT to productId,
