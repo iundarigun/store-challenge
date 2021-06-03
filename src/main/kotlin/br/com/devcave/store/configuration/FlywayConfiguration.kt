@@ -1,6 +1,5 @@
 package br.com.devcave.store.configuration
 
-import br.com.devcave.store.configuration.FlywayProperties
 import org.flywaydb.core.Flyway
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

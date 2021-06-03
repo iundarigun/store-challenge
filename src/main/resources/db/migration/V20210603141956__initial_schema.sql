@@ -24,3 +24,10 @@ ALTER TABLE ONLY product
     ADD CONSTRAINT fk_product_category_id
     FOREIGN KEY (category_id)
     REFERENCES category(id);
+
+CREATE TABLE discount (
+     id                    BIGSERIAL PRIMARY KEY,
+     "type"                character varying(100)       NOT NULL,
+     reference_id          bigint                       NOT NULL,
+     "value"               bigint                       NOT NULL
+);

@@ -3,7 +3,6 @@ package br.com.devcave.store.service
 import br.com.devcave.store.domain.Category
 import br.com.devcave.store.exception.ApplicationException
 import br.com.devcave.store.repository.CategoryRepository
-import kotlinx.coroutines.flow.Flow
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 

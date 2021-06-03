@@ -5,6 +5,7 @@ Techs:
 - [X] Spring Boot
 - [X] Postgres ~~or Mongo?~~
 - [X] Reactive ~~or no?~~
+- [ ] Detailed business rules 
 - [ ] Exception Handler  
 - [ ] Cache Redis
 - [ ] Security
@@ -13,4 +14,4 @@ Techs:
 - [ ] Checkstyle with detekt
 
 Pomodoro cycles:
-- 3
+- 5
