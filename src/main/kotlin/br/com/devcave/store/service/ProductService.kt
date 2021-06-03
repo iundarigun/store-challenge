@@ -12,13 +12,15 @@ class ProductService(
     private val categoryService: CategoryService,
     private val productRepository: ProductRepository
 ) {
-    suspend fun getAll(): Flow<ProductResponse> {
-        return productRepository.findAll()
+    suspend fun findByParams(category: String?, priceLessThan: Long?): Flow<ProductResponse> {
+        val categoryToFilter = category?.let { categoryService.getByName(it) }
+
+        return productRepository.findByParams(categoryToFilter?.id, priceLessThan)
             .map {
                 ProductResponse(
                     sku = it.sku,
                     name = it.name,
-                    category = categoryService.getById(it.categoryId).name,
+                    category = categoryToFilter?.name ?: categoryService.getById(it.categoryId).name,
                     price = Price(
                         original = it.price,
                         final = it.price
