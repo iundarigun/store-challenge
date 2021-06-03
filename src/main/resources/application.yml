@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: store-challenge
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/store
+    username: store
+    password: store
+
+flyway:
+  url: jdbc:postgresql://localhost:5432/store
+  username: store
+  password: store
+
+logging:
+  level:
+    io.r2dbc.postgresql.QUERY: DEBUG # for queries
+    io.r2dbc.postgresql.PARAM: DEBUG # for parameters
+
+server:
+  port: 1980
