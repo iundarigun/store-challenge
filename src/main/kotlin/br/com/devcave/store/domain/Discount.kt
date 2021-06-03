@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table
 @Table
 data class Discount(
     @Id
-    val id: Long,
+    val id: Long = 0,
 
     val type: DiscountType,
 

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: store-challenge
+  r2dbc:
+    url: r2dbc:postgresql://localhost:55432/test
+    username: test
+    password: test
+
+flyway:
+  url: jdbc:postgresql://localhost:55432/test
+  username: test
+  password: test

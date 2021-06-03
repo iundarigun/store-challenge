@@ -19,6 +19,9 @@ repositories {
 
 val springCloudVersion = "2020.0.3"
 val detektVersion = "1.17.1"
+val testContainersVersion = "1.15.3"
+val openApiVersion = "1.5.9"
+val fakerVersion = "1.0.2"
 
 dependencies {
     // Kotlin
@@ -44,10 +47,15 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
+    // Swagger
+    implementation("org.springdoc:springdoc-openapi-webflux-ui:$openApiVersion")
+
     // Tests dependencies
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
-
+    testImplementation("io.rest-assured:rest-assured")
+    testImplementation("com.github.javafaker:javafaker:$fakerVersion")
+    testImplementation("org.testcontainers:testcontainers:$testContainersVersion")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion")
 }
 
