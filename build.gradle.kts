@@ -21,6 +21,7 @@ val detektVersion = "1.17.1"
 val testContainersVersion = "1.15.3"
 val openApiVersion = "1.5.9"
 val fakerVersion = "1.0.2"
+val reactorToolsVersion = "1.0.6.RELEASE"
 
 dependencies {
     // Kotlin
@@ -31,9 +32,11 @@ dependencies {
     // webflux and validation
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("io.projectreactor.tools:blockhound:$reactorToolsVersion")
 
     // Kotlin reactor and coroutines
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     // Database
