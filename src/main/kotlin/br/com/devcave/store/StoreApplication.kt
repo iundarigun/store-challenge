@@ -17,6 +17,7 @@ class StoreApplication {
             builder.allowBlockingCallsInside("java.util.UUID", "randomUUID")
                 .allowBlockingCallsInside("java.io.InputStream", "readNBytes")
                 .allowBlockingCallsInside("java.io.FilterInputStream", "read")
+                .allowBlockingCallsInside("org.springdoc.webflux.api.OpenApiWebfluxResource", "openapiJson")
         }
         BlockHound.install(CoroutinesBlockHoundIntegration(), javaUUIDIntegration)
     }

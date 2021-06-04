@@ -11,7 +11,7 @@ spring:
   cache:
     redis:
       key-prefix: "product-store-cache"
-      time-to-live: 180000 # milliseconds - 30 min
+      time-to-live: 1800000 # milliseconds - 30 min
     type: redis
 
 flyway:

@@ -8,13 +8,12 @@ services:
   redis:
     image: redis
   app:
-    build: ../.
+    image: iundarigun/store-coroutines-challenge
     environment:
       - SPRING_R2DBC_URL=r2dbc:postgresql://database:5432/store
       - FLYWAY_URL=jdbc:postgresql://database:5432/store
       - SPRING_REDIS_HOST=redis
     depends_on:
       - database
-      - redis
     ports:
     - 1980:1980

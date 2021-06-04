@@ -29,6 +29,7 @@ abstract class CacheService<T>(private val typeParameterClass: Class<T>) {
             ?: block.invoke().also {
                 stringRedisTemplate.opsForValue()
                     .set(redisKey, objectMapper.writeValueAsString(it), cacheProperties.redis.timeToLive)
+                    .awaitFirstOrNull()
             }
     }
 }

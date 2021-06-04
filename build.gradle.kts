@@ -21,6 +21,7 @@ val detektVersion = "1.17.1"
 val testContainersVersion = "1.15.3"
 val openApiVersion = "1.5.9"
 val fakerVersion = "1.0.2"
+val mockkVersion = "1.11.0"
 val reactorToolsVersion = "1.0.6.RELEASE"
 
 dependencies {
@@ -61,6 +62,7 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("io.rest-assured:rest-assured")
     testImplementation("com.github.javafaker:javafaker:$fakerVersion")
+    testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.testcontainers:testcontainers:$testContainersVersion")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion")
 }
