@@ -35,10 +35,10 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x store-coroutines-challenge/gradlew
     - name: Clean
-      run: ./store-coroutines-challenge/gradlew clean
+      run: ./store-coroutines-challenge/gradlew clean -p store-coroutines-challenge
     - name: Build
-      run: ./store-coroutines-challenge/gradlew build -x test
+      run: ./store-coroutines-challenge/gradlew build -p store-coroutines-challenge -x test
     - name: Unit test
-      run: ./store-coroutines-challenge/gradlew unitTests
+      run: ./store-coroutines-challenge/gradlew unitTests -p store-coroutines-challenge
     - name: Integration test
-      run: ./store-coroutines-challenge/gradlew integrationTests
+      run: ./store-coroutines-challenge/gradlew integrationTests -p store-coroutines-challenge
