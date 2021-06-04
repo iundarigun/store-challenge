@@ -5,8 +5,11 @@ spring:
     url: r2dbc:postgresql://localhost:55432/test
     username: test
     password: test
+  cache:
+    type: none
 
 flyway:
   url: jdbc:postgresql://localhost:55432/test
   username: test
   password: test
+

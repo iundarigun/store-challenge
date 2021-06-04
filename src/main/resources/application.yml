@@ -5,6 +5,14 @@ spring:
     url: r2dbc:postgresql://localhost:5432/store
     username: store
     password: store
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    redis:
+      key-prefix: "product-store-cache"
+      time-to-live: 180000 # milliseconds - 30 min
+    type: redis
 
 flyway:
   url: jdbc:postgresql://localhost:5432/store
@@ -13,8 +21,8 @@ flyway:
 
 logging:
   level:
-    io.r2dbc.postgresql.QUERY: DEBUG # for queries
-    io.r2dbc.postgresql.PARAM: DEBUG # for parameters
+    io.r2dbc.postgresql.QUERY: INFO # for queries
+    io.r2dbc.postgresql.PARAM: INFO # for parameters
 
 server:
   port: 1980

@@ -33,8 +33,8 @@ class ProductService(
             category = categoryName,
             price = Price(
                 original = this.price,
-                final = discount?.let { this.price * (100 - it) / 100 } ?: this.price,
-                discountPercentage = discount?.let { "$discount%" }
+                final = discount?.let { this.price * (100 - it.value) / 100 } ?: this.price,
+                discountPercentage = discount?.let { "${discount.value}%" }
             )
         )
     }
