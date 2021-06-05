@@ -15,11 +15,18 @@ class CategoryService(
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @Cacheable("category")
+    @Cacheable("category", key = "'getByName:'.concat(#name)")
     @Transactional(readOnly = true)
     fun getByName(name: String): Category {
         logger.info("getByName $name not found on cache. Getting from database")
         return categoryRepository.findByName(name).orElseThrow {
+            ApplicationException(HttpStatus.NOT_FOUND, "Category not found")
+        }
+    }
+
+    @Cacheable("category", key = "'getById:'.concat(#categoryId)")
+    fun getById(categoryId: Long): Category {
+        return categoryRepository.findById(categoryId).orElseThrow {
             ApplicationException(HttpStatus.NOT_FOUND, "Category not found")
         }
     }

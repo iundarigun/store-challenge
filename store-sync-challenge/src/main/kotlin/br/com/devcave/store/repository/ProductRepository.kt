@@ -19,4 +19,10 @@ interface ProductRepository : CrudRepository<Product, Long> {
 
     @EntityGraph("findByParams", attributePaths = ["category", "discount", "category.discount"])
     fun findBy(pageable: Pageable): Page<Product>
+
+    fun existsBySku(sku: String): Boolean
+
+    fun existsByNameAndCategoryId(name: String, categoryId: Long): Boolean
+
+    fun existsByNameAndCategoryIdAndIdNot(name: String, categoryId: Long, id: Long): Boolean
 }

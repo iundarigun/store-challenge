@@ -1,6 +1,8 @@
 package br.com.devcave.store.extension
 
+import br.com.devcave.store.domain.entity.Category
 import br.com.devcave.store.domain.entity.Product
+import br.com.devcave.store.domain.request.ProductRequest
 import br.com.devcave.store.domain.response.PriceResponse
 import br.com.devcave.store.domain.response.ProductCustomerResponse
 import br.com.devcave.store.domain.response.ProductResponse
@@ -32,3 +34,18 @@ fun Product.toProductResponse(detailed: Boolean = false): ProductResponse {
         discountId = if (!detailed) discount?.id else null
     )
 }
+
+fun ProductRequest.toProduct(category: Category): Product =
+    Product(
+        sku = requireNotNull(this.sku),
+        name = this.name,
+        category = category,
+        price = this.price
+    )
+
+fun ProductRequest.toUpdateProduct(product: Product, category: Category): Product =
+    product.copy(
+        name = this.name,
+        category = category,
+        price = this.price
+    )

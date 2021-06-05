@@ -14,10 +14,10 @@ spring:
     port: 6379
   cache:
     redis:
-      key-prefix: "store-cache"
+      key-prefix: "store-cache:"
       time-to-live: 180000 # milliseconds - 30 min
     type: redis
-    cache-names: product, category
+    cache-names: product, productList, category
   flyway:
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}

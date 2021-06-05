@@ -2,6 +2,7 @@ package br.com.devcave.store.domain.entity
 
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
+import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -25,4 +26,4 @@ data class Category(
 
     @UpdateTimestamp
     val updatedAt: LocalDateTime = LocalDateTime.now()
-)
+) : Serializable
