@@ -1,6 +1,6 @@
 ![Status](https://github.com/iundarigun/store-challenge/actions/workflows/coroutines-ci.yml/badge.svg)
 
-# Product Challenge
+# Store Challenge
 
 Welcome to the store-challenge! This repository contains logic to get products from database and consult a list of products with the sku, name, category, price and discounts.
 
@@ -14,13 +14,16 @@ docker-compose -f environment/docker-compose-images.yml up
 
 2. Postgres and Redis images are getting from docker hub, but store challenge is compiling when try to start:
 ```shell
-docker-compose -f environment/docker-compose-images.yml up
+docker-compose -f environment/docker-compose-compiling.yml up
 ```
+_Advice_: These first and second options sometimes fails, because `depends on` instruction doesn't wait for ready connections on database, and application sometimes is ready before database, mainly the first run
 
-3. Postgres and Redis images are getting from docker hub, and we can run store from IDE. Use to develop time:
+3. Postgres and Redis images are getting from docker hub, and we can run store from IDE. Used to develop time:
 ```shell
 docker-compose -f environment/docker-compose.yml up
 ```
+
+I add swagger to access: http://localhost:1980/swagger-ui.html
 
 ### To run test
 
@@ -35,6 +38,8 @@ We can run only unit test or only integration tests
 ./gradlew integrationTests
 ```
 
+I added github actions to run all main commit as CI: https://github.com/iundarigun/store-challenge/actions/workflows/coroutines-ci.yml
+
 
 ## Technologies
 The main technology are `Kotlin` with `Spring Boot`. 
@@ -46,7 +51,7 @@ The next decision was if the API will be reactive or synchronous.
 - Mainly, for the database that I choose: `Postgres`. I choose it for many reasons:
     - I am a good experience with it
     - I want to add `Flyway` to project to manage the schema migrations.
-    - I considered use MonoDB, but my experience with it is only PoC. I feel little weird use a document oriented database for the schema flexibility and use a strongly typed programming language
+    - I considered use MongoDB, but my experience with it is only PoC. I feel little weird use a document oriented database for the schema flexibility and use a strongly typed programming language
     - Finally, I feel postgres weird too because doesn't exist JPA or good alternatives to manage relationships on Spring Data. I preferred to use spring Data that make all Queries manually. 
 
 I add too Redis from cache. Since Reactive not support Cache in Spring by annotation, I implement manually and very silly, only to test it. I do not implement for Flow/Flux returns, only for simple object, but for this goal, is really not necessary use Redis.
@@ -75,26 +80,3 @@ I separated with package with logical layers:
 - `exception`: Contains the specific application exception
 - `repository`: Contains the access database layer
 - `service`: Contains the business logic. Every entity has a service, who only access to the same entity respository. For access other entity data, use service. 
-
-
-
-Techs:
-- [X] Kotlin
-- [X] Spring Boot
-- [X] Postgres ~~or Mongo?~~
-- [X] Flyway
-- [X] Reactive ~~or no?~~
-- [X] Detailed business rules
-- [X] Exception Handler
-- [X] Cache Redis
-- [ ] Security
-- [X] TestsContainers
-- [X] Rest assured
-- [X] Checkstyle with detekt
-
-- [X] Unit tests
-- [X] BlockHound
-- [ ] Docker to start without nothing more
-
-Pomodoro cycles:
-- 12

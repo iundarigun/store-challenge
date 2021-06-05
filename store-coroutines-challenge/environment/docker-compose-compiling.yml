@@ -7,7 +7,7 @@ services:
       - POSTGRES_PASSWORD=store
   redis:
     image: redis
-  app:
+  store_coroutines_challenge:
     build: ../.
     environment:
       - SPRING_R2DBC_URL=r2dbc:postgresql://database:5432/store
