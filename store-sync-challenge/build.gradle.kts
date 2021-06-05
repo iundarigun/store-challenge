@@ -41,8 +41,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
-	// Client http
+	// Client http and circuit breaker
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 
 	// Tracing and monitoring
 	implementation("org.springframework.boot:spring-boot-starter-actuator")

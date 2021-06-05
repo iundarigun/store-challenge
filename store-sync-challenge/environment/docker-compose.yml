@@ -11,3 +11,12 @@ services:
     image: redis
     ports:
       - 6379:6379
+  mockWS:
+    image: iundarigun/mock-ws
+    ports:
+      - 1899:1899
+    environment:
+      - MOCK_DEFINITIONPATH=/home/config/
+      - MOCK_FILESPATH=/home/config/json/
+    volumes:
+      - ./mockws:/home/config

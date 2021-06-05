@@ -1,0 +1,37 @@
+[
+  {
+    "url": "/stock/000001",
+    "file": "stock.json",
+    "verbs": ["GET"],
+    "status": 200,
+    "ratioError": 0
+  },
+  {
+    "url": "/stock/000002",
+    "file": "stock.json",
+    "verbs": ["GET"],
+    "status": 200,
+    "ratioError": 0
+  },
+  {
+    "url": "/stock/000003",
+    "file": "stock.json",
+    "verbs": ["GET"],
+    "status": 200,
+    "ratioError": 0
+  },
+  {
+    "url": "/stock/000004",
+    "file": "stock.json",
+    "verbs": ["GET"],
+    "status": 200,
+    "ratioError": 90
+  },
+  {
+    "url": "/stock/000005",
+    "file": "stock.json",
+    "verbs": ["GET"],
+    "status": 200,
+    "ratioError": 0
+  }
+]

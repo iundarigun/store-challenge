@@ -6,10 +6,10 @@ import br.com.devcave.store.domain.response.ProductCustomerResponse
 import br.com.devcave.store.domain.response.ProductResponse
 import br.com.devcave.store.exception.ApplicationException
 import br.com.devcave.store.extension.toProduct
-import br.com.devcave.store.repository.ProductRepository
 import br.com.devcave.store.extension.toProductCustomerResponse
 import br.com.devcave.store.extension.toProductResponse
 import br.com.devcave.store.extension.toUpdateProduct
+import br.com.devcave.store.repository.ProductRepository
 import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductService(
+    private val stockService: StockService,
     private val categoryService: CategoryService,
     private val productRepository: ProductRepository
 ) {
@@ -58,7 +59,10 @@ class ProductService(
 
         val result = productRepository.findById(id)
             .orElseThrow { ApplicationException(HttpStatus.NOT_FOUND, "Category not found") }
-        return result.toProductResponse(true)
+
+        val stock = stockService.retrieveStock(result.sku)
+
+        return result.toProductResponse(true, stock?.quantity)
     }
 
     @Transactional

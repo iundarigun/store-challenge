@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test
 
 @Tag("unit")
 class ProductServiceTest {
-
+    private val stockService = mockk<StockService>()
     private val categoryService = mockk<CategoryService>()
     private val productRepository = mockk<ProductRepository>()
 
-    private val productService = ProductService(categoryService, productRepository)
+    private val productService = ProductService(stockService, categoryService, productRepository)
 
     @BeforeEach
     fun cleanMockk() {

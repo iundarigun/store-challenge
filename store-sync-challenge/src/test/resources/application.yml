@@ -20,5 +20,33 @@ spring:
     ignore-missing-migrations: true
     out-of-order: true
 
+feign:
+  client:
+    config:
+      stockClient:
+        url: http://localhost:1899
+        connectTimeout: 1000
+        readTimeout: 1000
+
+resilience4j:
+  retry:
+    configs:
+      default:
+        maxRetryAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 150s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
+
 server:
   port: 1980

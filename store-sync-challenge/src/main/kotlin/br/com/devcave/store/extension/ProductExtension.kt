@@ -22,7 +22,7 @@ fun Product.toProductCustomerResponse(): ProductCustomerResponse {
     )
 }
 
-fun Product.toProductResponse(detailed: Boolean = false): ProductResponse {
+fun Product.toProductResponse(detailed: Boolean = false, stock: Long? = null): ProductResponse {
     return ProductResponse(
         id = this.id,
         sku = this.sku,
@@ -31,7 +31,8 @@ fun Product.toProductResponse(detailed: Boolean = false): ProductResponse {
         categoryId = if (!detailed) category.id else null,
         price = this.price,
         discount = if (detailed) discount?.toDiscountResponse() else null,
-        discountId = if (!detailed) discount?.id else null
+        discountId = if (!detailed) discount?.id else null,
+        stock = stock
     )
 }
 
