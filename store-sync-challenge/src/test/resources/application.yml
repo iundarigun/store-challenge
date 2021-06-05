@@ -9,6 +9,8 @@ spring:
   jpa:
     show-sql: true
     open-in-view: false
+  redis:
+    port: 16379
   cache:
     type: none
   flyway:
