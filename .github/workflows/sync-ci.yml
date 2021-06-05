@@ -1,0 +1,44 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Store Synchronous Challenge CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: uninstall rootful Docker
+      run: sudo apt-get -q -y --purge remove moby-engine moby-buildx && sudo rm -rf /var/run/docker.sock
+    - name: install rootless Docker
+      run: |
+        mkdir -p $XDG_RUNTIME_DIR || true
+        curl -fsSL https://get.docker.com/rootless | sh > init.sh
+        cat init.sh
+        source <(grep '^export' init.sh)
+        PATH=$HOME/bin:$PATH dockerd-rootless.sh --experimental --storage-driver vfs &
+        sleep 1
+        DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock docker info || ls -la $XDG_RUNTIME_DIR
+    - name: Grant execute permission for gradlew
+      run: chmod +x store-sync-challenge/gradlew
+    - name: Clean
+      run: ./store-sync-challenge/gradlew clean -p store-sync-challenge
+    - name: Build
+      run: ./store-sync-challenge/gradlew build -p store-sync-challenge -x test
+    - name: Unit test
+      run: ./store-sync-challenge/gradlew unitTests -p store-sync-challenge
+    - name: Integration test
+      run: ./store-sync-challenge/gradlew integrationTests -p store-sync-challenge

@@ -1,6 +1,6 @@
 ![Status](https://github.com/iundarigun/store-challenge/actions/workflows/coroutines-ci.yml/badge.svg)
 
-# Store Challenge
+# Store Reactive Challenge
 
 Welcome to the store-challenge! This repository contains logic to get products from database and consult a list of products with the sku, name, category, price and discounts.
 
