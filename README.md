@@ -7,6 +7,6 @@ Welcome to the store-challenge! This repository contains logic to get products f
 
 ## Versions
 I created two versions for this challenge. The reason is because during the first development in reactive way, I feel that I can show more knowledge doing the synchronous way.
-- [Reactive way Kotlin and Coroutines](tree/main/store-coroutines-challenge)
-- [Sync way Kotlin](tree/main/store-sync-challenge)
+- [Reactive way Kotlin and Coroutines](https://github.com/iundarigun/store-challenge/tree/main/store-coroutines-challenge)
+- [Sync way Kotlin](https://github.com/iundarigun/store-challenge/tree/main/store-sync-challenge)
 
