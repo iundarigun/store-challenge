@@ -2,7 +2,7 @@
 
 # Store Reactive Challenge
 
-Welcome to the store-challenge! This repository contains logic to get products from database and consult a list of products with the sku, name, category, price and discounts.
+Welcome to the store-challenge! This folder contains the code to run a reactive application to get products from database and consult a list of products with the sku, name, category, price and discounts.
 
 ## How to run
 
@@ -16,7 +16,7 @@ docker-compose -f environment/docker-compose-images.yml up
 ```shell
 docker-compose -f environment/docker-compose-compiling.yml up
 ```
-_Advice_: These first and second options sometimes fails, because `depends on` instruction doesn't wait for ready connections on database, and application sometimes is ready before database, mainly the first run
+_Advice_: These first and second options sometimes fails, because `depends on` instruction doesn't wait for ready connections on database, and application sometimes is ready before database, mainly the first run. If this is your case, stopped and try again.
 
 3. Postgres and Redis images are getting from docker hub, and we can run store from IDE. Used to develop time:
 ```shell
@@ -60,7 +60,6 @@ To Unit test, I choose Junit5 with mockk for mock dependencies.
 
 To Integration test, I choose to use `RestAssured` with `TestContainers`. The main reason is to have an environment near the real scenario. 
 - TestContainers helps us to start containers with Postgres and other dependencies. The `application.yml` on test resource folder has specific properties.
-- When the application starts, RestAssured calls endpoints to test.
 
 I used `detekt` to keep my code inside the patterns. It is like `Ktlint` but with more flexibility to configure. Exists a task on gradle to run it. 
 

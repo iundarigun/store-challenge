@@ -5,24 +5,8 @@
 
 Welcome to the store-challenge! This repository contains logic to get products from database and consult a list of products with the sku, name, category, price and discounts.
 
+## Versions
+I created two versions for this challenge. The reason is because during the first development in reactive way, I feel that I can show more knowledge doing the synchronous way.
+- [Reactive way Kotlin and Coroutines](tree/main/store-coroutines-challenge)
+- [Sync way Kotlin](tree/main/store-sync-challenge)
 
-Techs:
-- [X] Kotlin
-- [X] Spring Boot
-- [X] Postgres ~~or Mongo?~~
-- [X] Flyway
-- [] Reactive ~~or no?~~
-- [X] Detailed business rules
-- [X] Exception Handler
-- [X] Cache Redis
-- [ ] Security
-- [X] TestsContainers
-- [X] Rest assured
-- [X] Checkstyle with detekt
-
-- [X] Unit tests
-- [X] BlockHound
-- [ ] Docker to start without nothing more
-
-Pomodoro cycles:
-- 12

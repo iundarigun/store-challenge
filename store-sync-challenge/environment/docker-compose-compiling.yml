@@ -1,0 +1,28 @@
+version: '3.6'
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=store
+      - POSTGRES_PASSWORD=store
+  redis:
+    image: redis
+  mockWS:
+    image: iundarigun/mock-ws
+    environment:
+      - MOCK_DEFINITIONPATH=/home/config/
+      - MOCK_FILESPATH=/home/config/json/
+    volumes:
+      - ./mockws:/home/config
+  store_sync_challenge:
+    build: ../.
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/store
+      - SPRING_REDIS_HOST=redis
+      - FEIGN_CLIENT_CONFIG_STOCKCLIENT_URL=http://mockWS:1899
+    depends_on:
+      - database
+      - redis
+      - mockWS
+    ports:
+      - 1980:1980
