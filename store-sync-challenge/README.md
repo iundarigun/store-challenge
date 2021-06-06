@@ -22,7 +22,7 @@ _Advice_: These first and second options sometimes fails, because `depends on` i
 docker-compose -f environment/docker-compose.yml up
 ```
 
-I add swagger to access: http://localhost:1980/swagger-ui.html
+I add swagger to access: http://localhost:1980/swagger-ui.html. I also added some endpoint to create/update/pagination find/find by id endpoint as management. These endpoints under `managment/products` would be secured, with basic auth or JWT. 
 
 ### To run test
 
