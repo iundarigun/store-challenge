@@ -8,15 +8,20 @@ import br.com.devcave.store.exception.ApplicationException
 import br.com.devcave.store.factory.CategoryFactory
 import br.com.devcave.store.factory.ProductFactory
 import br.com.devcave.store.repository.ProductRepository
+import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactor.asFlux
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.springframework.boot.autoconfigure.cache.CacheProperties
+import org.springframework.boot.autoconfigure.cache.CacheType
 import org.springframework.http.HttpStatus
 import reactor.core.publisher.Flux
 import reactor.test.StepVerifier
@@ -26,8 +31,17 @@ class ProductServiceTest {
     private val categoryService = mockk<CategoryService>()
     private val discountService = mockk<DiscountService>()
     private val productRepository = mockk<ProductRepository>()
+    private val cacheProperties = mockk<CacheProperties>()
+    private val cacheService = CacheService(mockk(relaxed = true), mockk(relaxed = true), cacheProperties)
+    private val productService = ProductService(categoryService, discountService, cacheService, productRepository)
 
-    private val productService = ProductService(categoryService, discountService, productRepository)
+    @BeforeEach
+    fun before() {
+        clearAllMocks()
+        every {
+            cacheProperties.type
+        } returns CacheType.NONE
+    }
 
     @Test
     fun `product list successfully`() {

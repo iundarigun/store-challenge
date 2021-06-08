@@ -10,13 +10,14 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CategoryService(
-    private val categoryRepository: CategoryRepository
-) : CacheService<Category>(Category::class.java) {
+    private val categoryRepository: CategoryRepository,
+    private val cacheService: CacheService
+) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @Transactional(readOnly = true)
     suspend fun getById(id: Long): Category {
-        return verifyAndExecute(id) {
+        return cacheService.verifyAndExecute(id, Category::class.java) {
             logger.info("getById $id not found on cache. Getting from database")
             categoryRepository.findById(id)
         } ?: throw ApplicationException(HttpStatus.NOT_FOUND, "Category not found")
@@ -24,7 +25,7 @@ class CategoryService(
 
     @Transactional(readOnly = true)
     suspend fun getByName(name: String): Category {
-        return verifyAndExecute(name) {
+        return cacheService.verifyAndExecute(name, Category::class.java) {
             logger.info("getByName $name not found on cache. Getting from database")
             categoryRepository.findByName(name)
         } ?: throw ApplicationException(HttpStatus.NOT_FOUND, "Category not found")

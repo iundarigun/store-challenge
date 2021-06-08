@@ -54,7 +54,7 @@ The next decision was if the API will be reactive or synchronous.
     - I considered use MongoDB, but my experience with it is only PoC. I feel little weird use a document oriented database for the schema flexibility and use a strongly typed programming language
     - Finally, I feel postgres weird too because doesn't exist JPA or good alternatives to manage relationships on Spring Data. I preferred to use spring Data that make all Queries manually. 
 
-I add too Redis from cache. Since Reactive not support Cache in Spring by annotation, I implement manually and very silly, only to test it. I do not implement for Flow/Flux returns, only for simple object, but for this goal, is really not necessary use Redis.
+I add too Redis from cache. Since Reactive not support Cache in Spring by annotation, I implement manually and very silly, only to test it. I implement too for Flow/Flux returns, but for this challenge Redis is an over engineering.
 
 To Unit test, I choose Junit5 with mockk for mock dependencies. 
 

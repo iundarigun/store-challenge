@@ -12,13 +12,14 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class DiscountService(
+    private val cacheService: CacheService,
     private val discountRepository: DiscountRepository
-) : CacheService<Discount>(Discount::class.java) {
+) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @Transactional(readOnly = true)
     suspend fun findTheBestDiscount(categoryId: Long, productId: Long): Discount? {
-        return verifyAndExecute("$categoryId:$productId") {
+        return cacheService.verifyAndExecute("$categoryId:$productId", Discount::class.java) {
             logger.info(
                 "findTheBestDiscount cat $categoryId, prod $productId. not found on cache. Getting from database"
             )
